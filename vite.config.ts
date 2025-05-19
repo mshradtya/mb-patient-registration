@@ -11,4 +11,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // optimizing this package was causing it to crash
+  optimizeDeps: {
+    exclude: ["@electric-sql/pglite"],
+  },
 });
