@@ -10,6 +10,8 @@ import App from "./App.tsx";
 
 const db = await PGlite.create({
   extensions: { live },
+  // indexed db for persistence
+  dataDir: "idb://patients-data",
 });
 
 const QUERY = `
