@@ -75,9 +75,11 @@ All scripts are defined in `package.json` and work the same way regardless of pa
 
 ## Challenges Faced
 
-- **Vite build configuration for workers**: Integrating the PGlite worker resulted in build issues due to Node-style imports. This was resolved by using a `.js` module for the worker and setting `type: "module"` in the Vite configuration.
+- **Vite dependency optimization of PGlite**: By default, Vite attempts to optimize the PGlite package, which caused errors at runtime. This was resolved by explicitly excluding `@electric-sql/pglite` from Vite's dependency optimization using the `optimizeDeps.exclude` setting in `vite.config.ts`.
 
-- **TypeScript compatibility with PGliteWorker**: The standard instantiation of PGliteWorker did not expose the `.live` namespace in its type definition. This was addressed by using the `PGliteWorker.create()` static method, which correctly returns a typed instance.
+* **Vite build configuration for workers**: Integrating the PGlite worker resulted in build issues due to Node-style imports. This was resolved by using a `.js` module for the worker and setting `type: "module"` in the Vite configuration.
+
+* **TypeScript compatibility with PGliteWorker**: The standard instantiation of PGliteWorker did not expose the `.live` namespace in its type definition. This was addressed by using the `PGliteWorker.create()` static method, which correctly returns a typed instance.
 
 ## Build and Deployment
 
