@@ -1,31 +1,23 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { PGlite } from "@electric-sql/pglite";
+import { PGliteWorker } from "@electric-sql/pglite/worker";
 import { live } from "@electric-sql/pglite/live";
 import { PGliteProvider } from "@electric-sql/pglite-react";
 
+import App from "./App";
 import "./index.css";
-import App from "./App.tsx";
 
-const db = await PGlite.create({
-  extensions: { live },
-  // indexed db for persistence
-  dataDir: "idb://patients-data",
-});
-
-const QUERY = `
-   CREATE TABLE IF NOT EXISTS patients (
-      id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      age INTEGER NOT NULL,
-      gender TEXT NOT NULL,
-      address TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  );
-`;
-
-await db.exec(QUERY);
+const db = await PGliteWorker.create(
+  new Worker(new URL("./pglite-worker.ts", import.meta.url), {
+    type: "module",
+  }),
+  {
+    extensions: {
+      live,
+    },
+  }
+);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
