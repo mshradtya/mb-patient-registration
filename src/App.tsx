@@ -12,6 +12,7 @@ import { useLiveQuery } from "@electric-sql/pglite-react";
 import RegisterPatientForm from "./components/RegisterPatient";
 import PatientTable from "./components/PatientTable";
 import type { Patient } from "./types";
+import RawQueryPanel from "./components/RawQueryPanel";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -43,6 +44,8 @@ function App() {
       </div>
 
       <PatientTable data={patients} />
+
+      <RawQueryPanel />
     </div>
   );
 }
