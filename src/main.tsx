@@ -9,7 +9,7 @@ import App from "./App";
 import "./index.css";
 
 const db = await PGliteWorker.create(
-  new Worker(new URL("./pglite-worker.ts", import.meta.url), {
+  new Worker(new URL("./pglite-worker.js", import.meta.url), {
     type: "module",
   }),
   {

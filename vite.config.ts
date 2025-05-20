@@ -19,4 +19,8 @@ export default defineConfig({
   build: {
     target: "esnext",
   },
+  // build error again - fix by explicitly mention vite to not use iife or umd
+  worker: {
+    format: "es",
+  },
 });
