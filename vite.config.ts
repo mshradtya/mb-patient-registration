@@ -13,6 +13,10 @@ export default defineConfig({
   },
   // optimizing this package was causing it to crash
   optimizeDeps: {
-    exclude: ["@electric-sql/pglite"],
+    exclude: ["@electric-sql/pglite", "@electric-sql/pglite-react"],
+  },
+  // wasn't building before - adding this enables top-level await in builds
+  build: {
+    target: "esnext",
   },
 });
