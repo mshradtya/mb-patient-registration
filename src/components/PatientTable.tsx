@@ -41,7 +41,9 @@ export default function PatientTable({ data }: Props) {
                 <TableCell>{p.age}</TableCell>
                 <TableCell>{p.gender}</TableCell>
                 <TableCell>{p.address}</TableCell>
-                <TableCell>{new Date(p.created_at).toLocaleString()}</TableCell>
+                <TableCell>
+                  {new Date(p.created_at + "Z").toLocaleString()}
+                </TableCell>
               </TableRow>
             ))
           )}
